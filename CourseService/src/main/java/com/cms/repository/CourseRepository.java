@@ -1,8 +1,13 @@
 package com.cms.repository;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-public interface CourseRepository {
-	
-	
-	
+import com.cms.model.Course;
+
+@Repository
+@Component
+public interface CourseRepository extends MongoRepository<Course,String> {
+    Course findByCourseId(String courseId);
 }

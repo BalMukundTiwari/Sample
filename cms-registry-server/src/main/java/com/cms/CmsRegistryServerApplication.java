@@ -9,7 +9,6 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 
 @SpringBootApplication
-
 public class CmsRegistryServerApplication {
 
 	public static void main(String[] args) {
