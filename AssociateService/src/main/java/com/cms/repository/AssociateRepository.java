@@ -7,5 +7,5 @@ import com.cms.model.Associate;
 
 @Repository
 public interface AssociateRepository extends MongoRepository<Associate, String> {
-    
+    public Associate findByAssociateId(String associateId);
 }
