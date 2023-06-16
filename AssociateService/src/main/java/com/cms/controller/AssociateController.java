@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cms.model.Associate;
@@ -26,7 +27,7 @@ public class AssociateController {
 	}
 	
 	@PostMapping("/associate/addAssociate")
-	public ResponseEntity<Associate> addAssociate(Associate associate)
+	public ResponseEntity<Associate> addAssociate(@RequestBody Associate associate)
 	{
 		try {
 			Associate associateAdded=iAssociateService.addAssociate(associate);
@@ -37,7 +38,7 @@ public class AssociateController {
 		}
 	}
 	
-	@PutMapping("/associate/updateAssociate/{associateId},{associateAddr}")
+	@PutMapping("/associate/updateAssociate/{associateId}/{associateAddr}")
 	public ResponseEntity<Associate>updateAssociate(@PathVariable String associateId,@PathVariable String associateAddr)
 	{
 		try {
@@ -60,10 +61,15 @@ public class AssociateController {
 			}
 	      }
 		
-//		@GetMapping("/associate/viewAll")
-//		public ResponseEntity<List<Associate>> viewAll(){
-//			
-//		}
+		@GetMapping("/associate/viewAll")
+		public ResponseEntity<List<Associate>> viewAll(){
+	 try {
+         List<Associate> associate = iAssociateService.viewAll();
+         return ResponseEntity.ok(associate); 
+     } catch (Exception e) {
+         return ResponseEntity.notFound().build();
+     }
+		}
 		
 	
 }

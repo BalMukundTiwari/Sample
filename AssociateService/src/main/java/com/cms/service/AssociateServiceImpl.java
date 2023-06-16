@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cms.exception.AssociateInvalidException;
 import com.cms.model.Associate;
+import com.cms.model.Course;
 import com.cms.repository.AssociateRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,12 +37,12 @@ public class AssociateServiceImpl implements IAssociateService{
 	            throw new AssociateInvalidException("AssociateId already exists");
 	        }
 
-	        if (cObj.getAssociateName() == null || cObj.getAssociateName().isEmpty()) {
+	        if (cObj == null) {
 	            throw new AssociateInvalidException("Invalid associate data");
 	        }
 
-	        String courseId = seqGenerator.generateNextAssociateId();
-	        cObj.setAssociateId(courseId);
+	        String associateId = seqGenerator.generateNextAssociateId();
+	        cObj.setAssociateId(associateId);
 	        Associate addedAssociate = associateRepository.save(cObj);
 	        log.info("This method addAssociate has completed successfully");
 	        return addedAssociate;
@@ -55,11 +56,12 @@ public class AssociateServiceImpl implements IAssociateService{
 	public Associate viewByAssociateId(String associateId) throws AssociateInvalidException {
 		try {
             // Check if the given associate id exists
-            if (associateRepository.findByAssociateId(associateId) != null) {
+			Associate associate = associateRepository.findByAssociateId(associateId);
+            if (associate == null) {
                 throw new AssociateInvalidException("AssociateId does not exist");
             }
 //            log.info("Associate updated successfully");
-            return null; // Placeholder return statement, replace with actual implementation
+            return associate; // Placeholder return statement, replace with actual implementation
         } catch (Exception e) {
 //            log.error("Exception occurred in updateAssociate method: {}", e.getMessage());
             throw e;
@@ -86,14 +88,16 @@ public class AssociateServiceImpl implements IAssociateService{
 	}
 
 	
+	@Override
 	public List<Associate> viewAll() {
 		try {
-//            log.info("Associate updated successfully");
-            return associateRepository.findAll();
-        } catch (Exception e) {
-//            log.error("Exception occurred in updateAssociate method: {}", e.getMessage());
-            throw e;
-        }
+			List<Associate> associate = associateRepository.findAll();
+			log.info("This method viewAll has completed successfully");
+			return associate;
+		} catch (Exception e) {
+			log.error("Error in viewAll: {}", e.getMessage());
+			throw e;
+		}
 	}
 
 }
