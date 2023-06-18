@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cms.exception.AssociateInvalidException;
 import com.cms.model.Associate;
-import com.cms.model.Course;
 import com.cms.repository.AssociateRepository;
 
 import lombok.extern.slf4j.Slf4j;
