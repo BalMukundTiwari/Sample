@@ -3,12 +3,17 @@ package com.cms.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.cms.exception.AdmissionInvalidException;
 import com.cms.model.Admission;
+import com.cms.repository.AdmissionRepository;
 
 
 public class AdmissionServiceImpl implements IAdmissionService {
 
+	@Autowired
+	private AdmissionRepository addmissionRepository;
 	
 	public Admission registerAssociateForCourse(Admission admission)throws AdmissionInvalidException {
 		// TODO Auto-generated method stub

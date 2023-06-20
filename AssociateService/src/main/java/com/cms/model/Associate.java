@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection="associate")
+@Document(collection = "associate")
 public class Associate {
 	
 	@Id
@@ -42,16 +42,6 @@ public class Associate {
 	public void setAssociateEmailId(String associateEmailId) {
 		this.associateEmailId = associateEmailId;
 	}
-	public Associate(String associateId, String associateName, String associateAddress, String associateEmailId) {
-		super();
-		this.associateId = associateId;
-		this.associateName = associateName;
-		this.associateAddress = associateAddress;
-		this.associateEmailId = associateEmailId;
-	}
-	public Associate() {
-		super();
-	}
-
 	
+
 }
