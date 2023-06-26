@@ -3,9 +3,13 @@ package com.cms.service;
 
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import com.cms.model.Login;
+import java.util.*;
+
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -25,9 +29,16 @@ public class UserDetailsImpl implements UserDetails {
 	}
 
 	public static UserDetailsImpl getUser(Login user) {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority (user.getRole()));
 
-		return null;
-	}
+		return new UserDetailsImpl(
+		    user.getUsername(),
+		    user.getPassword(),
+		    authorities);
+
+			}
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
