@@ -15,8 +15,8 @@ public class AdmissionServiceImplTest {
 	}
 	
 	
-	//check whether lowestFeeForTheRegisteredCourse returns the Lowest fee among all the courses registered by the associate
-	public void test110LowestFeeForTheRegisteredCourse() {
+	//check whether highestFeeForTheRegisteredCourse returns the highest fee among all the courses registered by the associate
+	public void test110highestFeeForTheRegisteredCourse() {
 		
 	}
 	
@@ -47,8 +47,8 @@ public class AdmissionServiceImplTest {
 		
 	}
 	
-	//check whether the lowestFeeForTheRegisteredCourse throws AdmissionInvalidException for invalid associate Id
-	public void test116LowestFeeForTheRegisteredCourseForInvalidAssociateId() {
+	//check whether the highestFeeForTheRegisteredCourse throws AdmissionInvalidException for invalid associate Id
+	public void test116highestFeeForTheRegisteredCourseForInvalidAssociateId() {
 		
 	}
 	

@@ -7,7 +7,7 @@ import java.util.Map;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
-
+import java.util.HashMap;
 
 public class PaypalConfig {
 
@@ -20,17 +20,19 @@ public class PaypalConfig {
 
 	
 	public Map<String, String> paypalSdkConfig() {
-		return null;
+		Map<String, String> configMap = new HashMap<>();
+        configMap.put("mode", mode);
+        return configMap;
 	}
 
 	
 	public OAuthTokenCredential oAuthTokenCredential() {
-		return null;
+		return new OAuthTokenCredential(clientId, clientSecret, paypalSdkConfig());
 	}
 
 	
 	public APIContext apiContext() throws PayPalRESTException {
-		return null;
+        return new APIContext(oAuthTokenCredential().getAccessToken());
 	}
 
 }
