@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cms.model.Associate;
 
-//@Service
-@FeignClient(name="AssociateService", url="http://localhost:9092")
+@Service
+@FeignClient(name = "Associate-Service", url = "http://localhost:9092")
 public interface ServiceProxy {
-	
 	@GetMapping("/associate/viewByAssociateId/{associateId}")
 	public ResponseEntity<Associate> viewByAssociateId(@PathVariable String associateId);
 }

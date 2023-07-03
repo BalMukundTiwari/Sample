@@ -1,14 +1,24 @@
 package com.cms.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document(collection = "admission_sequence")
 public class DatabaseSequence {
 
+	@Id
     private String id;
 
     private long seq;
 
-    public DatabaseSequence() {}
+    public DatabaseSequence() {
+    	
+    }
+    
+    public DatabaseSequence(String id, long seq) {
+        this.id = id;
+        this.seq = seq;
+    }
 
     public String getId() {
         return id;

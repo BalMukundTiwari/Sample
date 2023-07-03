@@ -29,7 +29,7 @@ public class CourseServiceImpl implements ICourseService{
 	@Autowired
 	private SequenceGeneratorService sequenceGeneratorService;
 	
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	// private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public Course addCourse(Course cObj) throws CourseInvalidException  {
