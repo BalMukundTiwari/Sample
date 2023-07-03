@@ -41,7 +41,7 @@ public class AdmissionServiceImpl implements IAdmissionService {
 		return null;
 	}
 
-	public List<String> highestFeeForTheRegisteredCourse(String associateId)throws AdmissionInvalidException {
+	public List<String> lowestFeeForTheRegisteredCourse(String associateId)throws AdmissionInvalidException {
 		return null;
 		
 	}

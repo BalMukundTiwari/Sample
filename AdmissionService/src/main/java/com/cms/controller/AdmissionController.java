@@ -42,7 +42,7 @@ public class AdmissionController {
 		ResponseEntity<Associate> response = restTemplate.getForEntity(
 				"http://localhost:7777/associate/viewByAssociateId/{associateId}", Associate.class, associateId);
 
-		ResponseEntity<Course> courseResponse = courseProxy.viewCourseByCourseId(courseId);
+		ResponseEntity<Course> courseResponse = courseProxy.viewByCourseId(courseId);
 		admission.setCourseId(courseId);
 		admission.setAssociateId(associateId);
 		try {
@@ -84,9 +84,9 @@ public class AdmissionController {
 	}
 
 	@GetMapping("/highestFee/{associateId}")
-	public ResponseEntity<?> getHighestFeeCourse(@PathVariable String associateId) {
+	public ResponseEntity<?> getLowestFeeCourse(@PathVariable String associateId) {
 		try {
-			List<String> highestFeeCourse = admissionService.highestFeeForTheRegisteredCourse(associateId);
+			List<String> highestFeeCourse = admissionService.lowestFeeForTheRegisteredCourse(associateId);
 			if (highestFeeCourse != null) {
 				return ResponseEntity.ok(highestFeeCourse);
 			} else {
