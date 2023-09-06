@@ -13,4 +13,4 @@ import com.cms.model.Associate;
 public interface ServiceProxy {
 	@GetMapping("/associate/viewByAssociateId/{associateId}")
 	public ResponseEntity<Associate> viewByAssociateId(@PathVariable String associateId);
-}
+} 

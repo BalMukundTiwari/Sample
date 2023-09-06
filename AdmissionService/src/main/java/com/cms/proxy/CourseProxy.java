@@ -17,4 +17,7 @@ public interface CourseProxy {
 	
 	@PutMapping("/calculateAverageFeedback/{courseId}/{rating}")
     public ResponseEntity<Course> calculateAverageFeedbackAndUpdate(@PathVariable String courseId, @PathVariable Float rating);
+
+     @GetMapping("/viewFeedback/{courseId}")
+    public ResponseEntity<?> viewFeedback(@PathVariable String courseId);
 }

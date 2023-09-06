@@ -1,0 +1,64 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AdmissionServiceApplication<AdmissionService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cms.AdmissionServiceApplication",
+            "projectName": "AdmissionService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AssociateServiceApplication<AssociateService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cms.AssociateServiceApplication",
+            "projectName": "AssociateService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-AuthenticationAuthorizationServiceApplication<AuthenticationAuthorizationService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cms.AuthenticationAuthorizationServiceApplication",
+            "projectName": "AuthenticationAuthorizationService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CmsRegistryServerApplication<cms-registry-server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cms.CmsRegistryServerApplication",
+            "projectName": "cms-registry-server",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-CourseServiceApplication<CourseService>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cms.CourseServiceApplication",
+            "projectName": "CourseService",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-GatewayApplication<Gateway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cms.GatewayApplication",
+            "projectName": "Gateway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

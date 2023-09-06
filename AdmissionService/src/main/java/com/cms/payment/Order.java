@@ -1,4 +1,8 @@
 package com.cms.payment;
+import lombok.ToString;
+
+
+@ToString
 public class Order {
 
 	private double price;

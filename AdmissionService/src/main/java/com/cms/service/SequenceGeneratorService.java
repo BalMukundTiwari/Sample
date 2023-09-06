@@ -1,45 +1,19 @@
 package com.cms.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Component;
+import java.util.concurrent.atomic.AtomicLong;
 
-import org.springframework.data.mongodb.core.FindAndModifyOptions;
+import org.springframework.stereotype.Service;
 
-import com.cms.model.Admission;
-import com.cms.model.DatabaseSequence;
-
-
-@Component
+@Service
 public class SequenceGeneratorService {
+
+	private static final long INITIAL_SEQ = 300;
+	private static final long INCREMENT_BY = 1;
 	
-    @Autowired
-    private MongoOperations mongoOperations;
-
-    public long getNextSequence(String sequenceName) {
-        Query query = new Query(Criteria.where("_id").is(sequenceName));
-        Update update = new Update().inc("seq", 1);
-        FindAndModifyOptions options = new FindAndModifyOptions().returnNew(true);
-        DatabaseSequence counter = mongoOperations.findAndModify(query, update, options, DatabaseSequence.class);
-        if (counter == null) {
-            counter = new DatabaseSequence();
-            counter.setId(sequenceName);
-            counter.setSeq(300L); // Set initial value here
-            mongoOperations.save(counter);
-        }
-        return counter.getSeq();
-    }
+	private AtomicLong sequence = new AtomicLong(INITIAL_SEQ);
     
-    public void setRegistrationId(Admission admission) {
-        admission.setRegistrationId(getNextSequence(Admission.SEQUENCE_NAME));
-    }
-    
-}
-
-
-
-
-
+	public long getNextAssociateId() {
+		long nextSequence = sequence.getAndAdd(INCREMENT_BY);
+		return nextSequence;
+	}
+}	

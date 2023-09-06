@@ -1,6 +1,5 @@
 package com.cms.service;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -18,228 +17,211 @@ import org.slf4j.LoggerFactory;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-
 @Service
 @Transactional
 @Slf4j
-public class CourseServiceImpl implements ICourseService{
+public class CourseServiceImpl implements ICourseService {
 	@Autowired
 	private CourseRepository courseRepository;
-	
+
 	@Autowired
 	private SequenceGeneratorService sequenceGeneratorService;
-	
-	// private final Logger log = LoggerFactory.getLogger(this.getClass());
-	
-	@Override
-	public Course addCourse(Course cObj) throws CourseInvalidException  {
-//		try {
-//			Course exisitingCourse = courseRepository.findByCourseId((String)cObj.getCourseId());
-//			if(exisitingCourse !=null) {
-//				throw new CourseInvalidException("CourseId already Exist");
-//			}
-//			
-//			// Generating the courseId using the sequence
-//			String courseId = sequenceGeneratorService.getNextCourseId();
-//			cObj.setCourseId(courseId);
-//			Course addedCourse = courseRepository.save(cObj);
-//			log.info("This method addCourse has completed successfully");
-//			return addedCourse;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			log.error("Error in addCourse: {}",e.getMessage());
-//			throw e;
-//		}
-		
-		try {
-		    Optional<Course> existingCourseOptional = courseRepository.findByCourseId((String) cObj.getCourseId());
-		    if (existingCourseOptional.isPresent()) {
-		        throw new CourseInvalidException("CourseId already exists");
-		    }
 
-		    // Generating the courseId using the sequence
-		    String courseId = sequenceGeneratorService.getNextCourseId();
-		    cObj.setCourseId(courseId);
-		    Course addedCourse = courseRepository.save(cObj);
-		    log.info("The method addCourse has completed successfully");
-		    return addedCourse;
+	// private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+	@Override
+	public Course addCourse(Course cObj) throws CourseInvalidException {
+		// try {
+		// Course exisitingCourse =
+		// courseRepository.findByCourseId((String)cObj.getCourseId());
+		// if(exisitingCourse !=null) {
+		// throw new CourseInvalidException("CourseId already Exist");
+		// }
+		//
+		// // Generating the courseId using the sequence
+		// String courseId = sequenceGeneratorService.getNextCourseId();
+		// cObj.setCourseId(courseId);
+		// Course addedCourse = courseRepository.save(cObj);
+		// log.info("This method addCourse has completed successfully");
+		// return addedCourse;
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// log.error("Error in addCourse: {}",e.getMessage());
+		// throw e;
+		// }
+
+		try {
+			Optional<Course> existingCourseOptional = courseRepository.findByCourseId((String) cObj.getCourseId());
+			if (existingCourseOptional.isPresent()) {
+				throw new CourseInvalidException("CourseId already exists");
+			}
+
+			// Generating the courseId using the sequence
+			String courseId = sequenceGeneratorService.getNextCourseId();
+			cObj.setCourseId(courseId);
+			Course addedCourse = courseRepository.save(cObj);
+			log.info("The method addCourse has completed successfully");
+			return addedCourse;
 		} catch (Exception e) {
-		    log.error("Error in addCourse: {}", e.getMessage());
-		    throw e;
+			log.error("Error in addCourse: {}", e.getMessage());
+			throw e;
 		}
 	}
 
 	@Override
 	public Course updateCourse(String courseId, Integer fees) throws CourseInvalidException {
-//		try {
-//			Course exisitingCourse = courseRepository.findByCourseId(courseId);
-//			if(exisitingCourse ==null) {
-//				throw new CourseInvalidException("courseId does not exist");
-//			}
-//			exisitingCourse.setFees(fees);
-//			Course updateCourse = courseRepository.save(exisitingCourse);
-//			log.info("This method updateCourse has completed sucessfully");
-//			return updateCourse;
-//		} catch (Exception e) {
-//			log.error("Error in updateCourse: {}", e.getMessage());
-//			throw e;
-//		}
-		
+		// try {
+		// Course exisitingCourse = courseRepository.findByCourseId(courseId);
+		// if(exisitingCourse ==null) {
+		// throw new CourseInvalidException("courseId does not exist");
+		// }
+		// exisitingCourse.setFees(fees);
+		// Course updateCourse = courseRepository.save(exisitingCourse);
+		// log.info("This method updateCourse has completed sucessfully");
+		// return updateCourse;
+		// } catch (Exception e) {
+		// log.error("Error in updateCourse: {}", e.getMessage());
+		// throw e;
+		// }
+
 		try {
-	        Optional<Course> existingCourseOptional = courseRepository.findByCourseId(courseId);
-	        if (existingCourseOptional.isEmpty()) {
-	            throw new CourseInvalidException("courseId does not exist");
-	        }
-	        Course existingCourse = existingCourseOptional.get();
-	        existingCourse.setFees(fees);
-	        Course updatedCourse = courseRepository.save(existingCourse);
-	        log.info("This method updateCourse has completed successfully");
-	        return updatedCourse;
-	    } catch (Exception e) {
-	        log.error("Error in updateCourse: {}", e.getMessage());
-	        throw e;
-	    }
+			Optional<Course> existingCourseOptional = courseRepository.findByCourseId(courseId);
+			if (existingCourseOptional.isEmpty()) {
+				throw new CourseInvalidException("courseId does not exist");
+			}
+			Course existingCourse = existingCourseOptional.get();
+			existingCourse.setFees(fees);
+			Course updatedCourse = courseRepository.save(existingCourse);
+			log.info("This method updateCourse has completed successfully");
+			return updatedCourse;
+		} catch (Exception e) {
+			log.error("Error in updateCourse: {}", e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
 	public Course viewByCourseId(String courseId) throws CourseInvalidException {
-//		try {
-//			Course course = courseRepository.findByCourseId(courseId);
-//			if(course == null) {
-//				throw new CourseInvalidException("Invalid courseId");
-//			}
-//			log.info("The method viewByCourseId has completed successfully");
-//			return course;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			log.error("Error in viewByCourseId: {}",e.getMessage());
-//			throw e;
-//		}
-		
+		// try {
+		// Course course = courseRepository.findByCourseId(courseId);
+		// if(course == null) {
+		// throw new CourseInvalidException("Invalid courseId");
+		// }
+		// log.info("The method viewByCourseId has completed successfully");
+		// return course;
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// log.error("Error in viewByCourseId: {}",e.getMessage());
+		// throw e;
+		// }
+
 		try {
-	        Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
-	        if (courseOptional.isEmpty()) {
-	            throw new CourseInvalidException("Invalid courseId");
-	        }
-	        Course course = courseOptional.get();
-	        log.info("The method viewByCourseId has completed successfully");
-	        return course;
-	    } catch (Exception e) {
-	        log.error("Error in viewByCourseId: {}", e.getMessage());
-	        throw e;
-	    }
+			Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
+			if (courseOptional.isEmpty()) {
+				throw new CourseInvalidException("Invalid courseId");
+			}
+			Course course = courseOptional.get();
+			log.info("The method viewByCourseId has completed successfully");
+			return course;
+		} catch (Exception e) {
+			log.error("Error in viewByCourseId: {}", e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
 	public Course calculateAverageFeedbackAndUpdate(String courseId, float rating) throws CourseInvalidException {
-//		try {
-//			Course course = courseRepository.findByCourseId(courseId);
-//			if(course == null) {
-//				throw new CourseInvalidException("CourseId does not exist");
-//			}
-//			float currentRating = course.getRating();
-//            int feedbackCount = 1; // Assuming we have received one new feedback
-//
-//            float averageRating = (currentRating + rating) / (feedbackCount + 1);
-//            course.setRating(averageRating);
-//			
-//			Course updateCourse = courseRepository.save(course);
-//            log.info("The method calculateAverageFeedbackAndUpdate has completed successfully");
-//            return updateCourse;
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			log.error("Error in calculateAverageFeedbackAndUpdate: {}", e.getMessage());
-//            throw e;
-//		}
-		
+		// try {
+		// Course course = courseRepository.findByCourseId(courseId);
+		// if(course == null) {
+		// throw new CourseInvalidException("CourseId does not exist");
+		// }
+		// float currentRating = course.getRating();
+		// int feedbackCount = 1; // Assuming we have received one new feedback
+		//
+		// float averageRating = (currentRating + rating) / (feedbackCount + 1);
+		// course.setRating(averageRating);
+		//
+		// Course updateCourse = courseRepository.save(course);
+		// log.info("The method calculateAverageFeedbackAndUpdate has completed
+		// successfully");
+		// return updateCourse;
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// log.error("Error in calculateAverageFeedbackAndUpdate: {}", e.getMessage());
+		// throw e;
+		// }
+
 		try {
-	        Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
-	        if (courseOptional.isEmpty()) {
-	            throw new CourseInvalidException("CourseId does not exist");
-	        }
-	        Course course = courseOptional.get();
+			Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
+			if (courseOptional.isEmpty()) {
+				throw new CourseInvalidException("CourseId does not exist");
+			}
+			Course course = courseOptional.get();
 
-	        float currentRating = course.getRating();
-	        int feedbackCount = 1; // Assuming we have received one new feedback
+			float currentRating = course.getRating();
+			int feedbackCount = 1; // Assuming we have received one new feedback
 
-	        float averageRating = (currentRating + rating) / (feedbackCount + 1);
-	        course.setRating(averageRating);
+			float averageRating = (currentRating + rating) / (feedbackCount + 1);
+			course.setRating(averageRating);
 
-	        Course updatedCourse = courseRepository.save(course);
-	        log.info("The method calculateAverageFeedbackAndUpdate has completed successfully");
-	        return updatedCourse;
-	    } catch (Exception e) {
-	        log.error("Error in calculateAverageFeedbackAndUpdate: {}", e.getMessage());
-	        throw e;
-	    }
+			Course updatedCourse = courseRepository.save(course);
+			log.info("The method calculateAverageFeedbackAndUpdate has completed successfully");
+			return updatedCourse;
+		} catch (Exception e) {
+			log.error("Error in calculateAverageFeedbackAndUpdate: {}", e.getMessage());
+			throw e;
+		}
 	}
 
-		
 	public float findFeedbackRatingForCourseId(String courseId) throws CourseInvalidException {
-//		try {
-//            Course course = courseRepository.findByCourseId(courseId);
-//            if (course == null) {
-//                throw new CourseInvalidException("CourseId does not exist");
-//            }
-//            // Retrieve feedback rating for the course
-////            float rating = courseRepository.findByFeedbackRating(courseId);
-//            float rating = course.getRating();
-//            log.info("The method findFeedbackRatingForCourseId has completed successfully");
-//            return rating;
-//        } catch (Exception e) {
-//            log.error("Error in findFeedbackRatingForCourseId: {}", e.getMessage());
-//            throw e;
-//        }
-		
-		 try {
-		        Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
-		        if (courseOptional.isEmpty()) {
-		            throw new CourseInvalidException("CourseId does not exist");
-		        }
-		        Course course = courseOptional.get();
+		// try {
+		// Course course = courseRepository.findByCourseId(courseId);
+		// if (course == null) {
+		// throw new CourseInvalidException("CourseId does not exist");
+		// }
+		// // Retrieve feedback rating for the course
+		//// float rating = courseRepository.findByFeedbackRating(courseId);
+		// float rating = course.getRating();
+		// log.info("The method findFeedbackRatingForCourseId has completed
+		// successfully");
+		// return rating;
+		// } catch (Exception e) {
+		// log.error("Error in findFeedbackRatingForCourseId: {}", e.getMessage());
+		// throw e;
+		// }
 
-		        // Retrieve feedback rating for the course
-		        float rating = course.getRating();
-		        log.info("The method findFeedbackRatingForCourseId has completed successfully");
-		        return rating;
-		    } catch (Exception e) {
-		        log.error("Error in findFeedbackRatingForCourseId: {}", e.getMessage());
-		        throw e;
-		    }
+		try {
+			Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
+			if (courseOptional.isEmpty()) {
+				throw new CourseInvalidException("CourseId does not exist");
+			}
+			Course course = courseOptional.get();
+
+			// Retrieve feedback rating for the course
+			float rating = course.getRating();
+			log.info("The method findFeedbackRatingForCourseId has completed successfully");
+			return rating;
+		} catch (Exception e) {
+			log.error("Error in findFeedbackRatingForCourseId: {}", e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
 	public Course deactivateCourse(String courseId) throws CourseInvalidException {
-//		try {
-//            Course course = courseRepository.findByCourseId(courseId);
-//            if (course == null) {
-//                throw new CourseInvalidException("CourseId does not exist");
-//            }
-//            Course deactivatedCourse = courseRepository.save(course);
-//            log.info("The method deactivateCourse has completed successfully");
-//            return deactivatedCourse;
-//        } catch (Exception e) {
-//            log.error("Error in deactivateCourse: {}", e.getMessage());
-//            throw e;
-//        }
-		
-		try {
-	        Optional<Course> courseOptional = courseRepository.findByCourseId(courseId);
-	        if (courseOptional.isEmpty()) {
-	            throw new CourseInvalidException("CourseId does not exist");
-	        }
-	        Course course = courseOptional.get();
 
-	        // Deactivate the course (perform necessary logic)
+		if (courseId == null || courseId.isEmpty()) {
+			throw new CourseInvalidException("invalid course id");
+		}
+		Course course = courseRepository.findById(courseId).orElse(null);
+		if (course == null) {
+			throw new CourseInvalidException("course does not exist");
+		}
+		courseRepository.deleteById(courseId);
+		// admissionProxy.deactivateCourse(courseId);
+		return course;
 
-	        Course deactivatedCourse = courseRepository.save(course);
-	        log.info("The method deactivateCourse has completed successfully");
-	        return deactivatedCourse;
-	    } catch (Exception e) {
-	        log.error("Error in deactivateCourse: {}", e.getMessage());
-	        throw e;
-	    }
-		
 	}
 
 	@Override
@@ -253,6 +235,5 @@ public class CourseServiceImpl implements ICourseService{
 			throw e;
 		}
 	}
-	
 
 }
